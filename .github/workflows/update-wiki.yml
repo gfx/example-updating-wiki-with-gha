@@ -18,7 +18,7 @@ jobs:
     - name: Checkout the wiki repository
       uses: actions/checkout@v2
       with:
-        repository: '${{ env.GITHUB_REPOSITORY }}.wiki'
+        repository: "${{ env.GITHUB_REPOSITORY }}.wiki"
         ref: master
         path: .wiki
 
