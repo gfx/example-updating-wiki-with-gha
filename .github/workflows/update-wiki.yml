@@ -39,5 +39,5 @@ jobs:
       run: |
         set -xe
         git add .
-        git commit -m "update the wiki page by bot (${GITHUB_WORKFLOW})"
+        git commit --allow-empty -m "update the wiki page by bot (${GITHUB_WORKFLOW})"
         git push origin master
