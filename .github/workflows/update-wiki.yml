@@ -31,8 +31,8 @@ jobs:
       working-directory: .wiki
       run: |
         set -xe
-        git config user.name  "$(cd .. && git config user.name)"
-        git config user.email "$(cd .. && git config user.email)"
+        git config user.name  "[bot] ${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}+bot@users.noreply.github.com"
 
     - name: Update the wiki page
       working-directory: .wiki
