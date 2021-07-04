@@ -7,18 +7,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # You should set timeout in any kind of GitHub workflows
     timeout-minutes: 5
 
     steps:
     - name: Checkout the main repository
       uses: actions/checkout@v2
       with:
-        fetch-depth: 0
+        # You need to set the depth to 0 if you'll make diff in branches
+        # fetch-depth: 0
 
     - name: Checkout the wiki repository
       uses: actions/checkout@v2
       with:
         repository: "${{ github.repository }}.wiki"
+        # As of Jul 2021, the default branch of a GitHub wiki is `master`, not `main`
         ref: master
         path: .wiki
 
@@ -29,6 +32,7 @@ jobs:
 
     - name: Configure the GitHub wiki identity
       working-directory: .wiki
+      # "${GITHUB_ACTOR}@users.noreply.github.com" is associated to the actor without real emails
       run: |
         set -xe
         git config user.name  "[bot] ${GITHUB_ACTOR}"
@@ -36,6 +40,8 @@ jobs:
 
     - name: Update the wiki page
       working-directory: .wiki
+      # --allow-empty may be good enough for almost all the situations,
+      # but maybe you want to do `if git commit ... ; then` if you don't want to record an empty commit
       run: |
         set -xe
         git add .
