@@ -13,9 +13,9 @@ jobs:
     steps:
     - name: Checkout the main repository
       uses: actions/checkout@v2
-      with:
-        # You need to set the depth to 0 if you'll make diff in branches
-        # fetch-depth: 0
+      # You need to set `with.fetch-depth` to 0 if you'll make diff in branches
+      # with:
+      #   fetch-depth: 0
 
     - name: Checkout the wiki repository
       uses: actions/checkout@v2
