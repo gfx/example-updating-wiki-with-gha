@@ -1,0 +1,36 @@
+name: "Update Wiki"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout the main repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Checkout the wiki repository
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ env.GITHUB_REPOSITORY }}.wiki
+        ref: master
+        path: .wiki
+
+    - name: Generate the Wiki Page
+      run: |
+        ./generate-wikipage | tee .wiki/Home.md
+
+    - name: Update the wiki page
+      working-directory: .wiki
+      run: |
+        git config --global user.name  "$(cd .. && git config user.name)"
+        git config --global user.email "$(cd .. && git config user.email)"
+        git add .
+        git commit -m "update the wiki page by bot (${{ env.GITHUB_WORKFLOW }})"
+        git push origin master
