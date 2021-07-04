@@ -18,7 +18,7 @@ jobs:
     - name: Checkout the wiki repository
       uses: actions/checkout@v2
       with:
-        repository: ${{ env.GITHUB_REPOSITORY }}.wiki
+        repository: ${{ GITHUB_REPOSITORY }}.wiki
         ref: master
         path: .wiki
 
@@ -32,5 +32,5 @@ jobs:
         git config --global user.name  "$(cd .. && git config user.name)"
         git config --global user.email "$(cd .. && git config user.email)"
         git add .
-        git commit -m "update the wiki page by bot (${{ env.GITHUB_WORKFLOW }})"
+        git commit -m "update the wiki page by bot (${GITHUB_WORKFLOW})"
         git push origin master
