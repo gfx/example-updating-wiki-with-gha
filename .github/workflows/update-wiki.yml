@@ -24,17 +24,20 @@ jobs:
 
     - name: Generate the Wiki Page
       run: |
+        set -xe
         ./generate-wikipage | tee .wiki/Home.md
 
     - name: Configure the GitHub wiki identity
       working-directory: .wiki
       run: |
+        set -xe
         git config user.name  "$(cd .. && git config user.name)"
         git config user.email "$(cd .. && git config user.email)"
 
     - name: Update the wiki page
       working-directory: .wiki
       run: |
+        set -xe
         git add .
         git commit -m "update the wiki page by bot (${GITHUB_WORKFLOW})"
         git push origin master
