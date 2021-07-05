@@ -10,6 +10,8 @@ console.log("");
 
 async function countChar(dirname) {
   const dir = await fs.opendir(dirname);
+  console.log(`<table>`);
+  console.log(`<tr><th>filename</th><th># of chars</th></tr>`);
   while (true) {
     const dirent = await dir.read();
     if (dirent != null) {
@@ -20,14 +22,13 @@ async function countChar(dirname) {
         for (let _ of content.toString("utf-8")) {
           len++;
         }
-        console.log(
-          `${filename.padStart(10, " ")}: ${len.toString().padStart(10, " ")}`
-        );
+        console.log(`<tr><td>${filename}</td><td>${len}</td></tr>`);
       }
     } else {
       break;
     }
   }
+  console.log("</table>");
   await dir.close();
 }
 
