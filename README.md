@@ -1,4 +1,4 @@
-# Updating GitHub Wiki Pages with GitHub Actions
+# Updating GitHub Wiki Pages with GitHub Actions [![Update Wiki](https://github.com/gfx/example-updating-wiki-with-gha/actions/workflows/update-wiki.yml/badge.svg)](https://github.com/gfx/example-updating-wiki-with-gha/actions/workflows/update-wiki.yml)
 
 This is an example repository to update wiki pages in a GitHub Actions workflow.
 
